@@ -9,6 +9,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.FightContext;
+import views.html.index;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -26,6 +27,11 @@ public class HomeController extends Controller {
     private FormFactory formFactory;
 
     public static final String fightStateKey = "fightState";
+
+
+    public Result index() {
+        return ok(index.render("Hello igor"));
+    }
 
 
     public Result getPersons() {

@@ -1,0 +1,34 @@
+<div class="col-12 animate-fade" ng-show="mainFrame">
+  <div id="mainFrame">
+    <img src="assets/images/fireBall.png" ng-hide="fireBallAction" class="methodHeading">
+    <div class="mainBlock">
+      <p class="name">{{username}}</p>
+      <img src="assets/images/warrior-png-15.png" width="100%" height="100%">
+      <div class="healthWrapperPlayer">
+        <div class="healthBar" ng-style="healthBarSizePlayer"></div>
+      </div>
+      <span class="health">{{mainData.hero.currentHealth}}/{{mainData.hero.maxHealth}}</span>
+      <button class="logInButton actionButton" title="attacks for 10-15 damage" ng-click="attack()" ng-disabled="!attackAction">Attack</button>
+      <button class="logInButton actionButton" ng-disabled="!defendAction">Defend</button>
+      <button class="logInButton actionButton" ng-click="fireBall()" ng-disabled="!fireBallAction">Fireball</button>
+    </div>
+    <div class="mainBlock">
+      <div class="scrollBox">
+                An HTML scroll box is a box that grows scroll bars when it's contents are too large to fit in the box. How do you make the box? You create the box using the HTML div tag. Then, to make the box scroll, you apply the CSS overflow property to the div.
+
+        But, you don't need to worry about the technical details if you don't want to. You can simply copy and paste the HTML scroll box code below. Of course, you can change the values to suit (such as the size of the scroll box, color etc)
+      </div>
+    </div>
+    <div class="mainBlock">
+      <p class="name">Fire Elemental</p>
+      <img src="assets/images/FireElemental.png" width="100%" height="100%" id="fireElem">
+      <div class="healthWrapperBoss" id="fireElemHealth">
+        <div class="healthBar" ng-style="healthBarSizeBoss"></div>
+      </div>
+      <span class="health">{{mainData.enemy.currentHealth}}/{{mainData.enemy.maxHealth}}</span>
+      <div class="scrollBox scrollBoxInfo">
+                Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description
+      </div>
+    </div>
+  </div>
+</div>

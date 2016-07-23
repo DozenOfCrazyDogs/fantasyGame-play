@@ -2,11 +2,10 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET     /                           controllers.HomeController.index
 
 GET     /initGame                   controllers.HomeController.initGame
 GET     /currentState               controllers.HomeController.getCurrentState
 POST    /heroTurn                   controllers.HomeController.heroTurn
 
-
-
-GET     /assets/*file               controllers.Assets.at(path="public", file)
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
