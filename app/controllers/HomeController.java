@@ -1,9 +1,13 @@
 package controllers;
 
+import controllers.dto.InboundAction;
+import models.FightState;
 import models.Person;
+import play.cache.CacheApi;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
+import services.FightProcessor;
 import views.html.index;
 
 import javax.inject.Inject;
@@ -19,6 +23,8 @@ public class HomeController extends Controller {
 
     @Inject
     private FormFactory formFactory;
+    @Inject
+    private FightProcessor fightProcessor;
 
     /**
      * An action that renders an HTML page with a welcome message.
@@ -45,6 +51,13 @@ public class HomeController extends Controller {
         List<Person> persons = Person.find.where().ilike("name", "%igor%").findPagedList(0, 10).getList();
         return ok(toJson(persons));
     }
+
+//    public Result heroTurn(){
+////        CacheApi cacheApi = Cache.
+////        Application
+////        Cache.get("state", FightState.class);
+//        InboundAction inboundAction = formFactory.form(InboundAction.class).bindFromRequest().get();
+//    }
 
 
 }

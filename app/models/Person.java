@@ -5,11 +5,11 @@ package models;
  */
 
 import com.avaje.ebean.Model;
+import services.Action;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.HashMap;
 
 @Entity
 public class Person extends Model {
@@ -18,6 +18,12 @@ public class Person extends Model {
 
     @Id
     public Integer id;
-
     public String name;
+    public Integer health;
+    public Integer mana;
+    public Integer attackValue;
+    public Integer DefenceValue;
+
+    public HashMap<String, Action> actions;
+    public HashMap<String, Buff> buffs;
 }
