@@ -1,14 +1,14 @@
 package controllers;
 
 import controllers.dto.InboundAction;
-import models.FightState;
-import models.Person;
+import models.personages.Person;
+import models.personages.enemies.FireElemental;
+import models.personages.heroes.Warrior;
 import play.cache.CacheApi;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
-import services.FightProcessor;
-import views.html.index;
+import services.FightContext;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -24,43 +24,36 @@ public class HomeController extends Controller {
     private CacheApi cacheApi;
     @Inject
     private FormFactory formFactory;
-    @Inject
-    private FightProcessor fightProcessor;
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
-    public Result index() {
-        return ok(index.render("Hello igor"));
-    }
+    public static final String fightStateKey = "fightState";
 
-    public Result addPerson() {
-        Person person = formFactory.form(Person.class).bindFromRequest().get();
-        person.save();
-        return redirect(routes.HomeController.index());
-    }
-
-    public Result getPerson(Integer id) {
-        Person person = Person.find.byId(id);
-        return ok(toJson(person));
-    }
 
     public Result getPersons() {
         List<Person> persons = Person.find.where().ilike("name", "%igor%").findPagedList(0, 10).getList();
         return ok(toJson(persons));
     }
 
+    public Result initGame() {
+        Warrior warrior = Warrior.createWarrior("Igor");
+        FireElemental fireElemental = FireElemental.createFireElemental();
+
+        FightContext fightContext = new FightContext();
+        fightContext.setupPersonages(warrior,fireElemental);
+        fightContext.setupFullHealthMana();
+        cacheApi.set(fightStateKey, fightContext);
+        return getCurrentState();
+    }
+
+    public Result getCurrentState() {
+        return ok(toJson(cacheApi.get(fightStateKey)));
+    }
+
     public Result heroTurn() {
         InboundAction inboundAction = formFactory.form(InboundAction.class).bindFromRequest().get();
-
-        FightState fightState = cacheApi.get("fightState");
-        FightProcessor fightProcessor = new FightProcessor(fightState);
-        fightProcessor.doAction(inboundAction);
-//        Cache.get("state", FightState.class);
-        return ok();
+        FightContext fightContext = cacheApi.get(fightStateKey);
+        fightContext.doTurn(inboundAction);
+        cacheApi.set(fightStateKey, fightContext);
+        return getCurrentState();
     }
 
 

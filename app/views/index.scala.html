@@ -3,24 +3,13 @@
 * message to display.
 *@
 @(message: String)
-    @*
-    * Call the the `main` template with two arguments. The first
-    * argument is a `String` with the title of the page, the second
-    * argument is an `Html` object containing the body of the page.
-    *@
-    @main("Welcome to Play") {
+@*
+* Call the the `main` template with two arguments. The first
+* argument is a `String` with the title of the page, the second
+* argument is an `Html` object containing the body of the page.
+*@
+@main("Welcome to Play") {
 
+    hello igor
 
-        <form actionName="@routes.HomeController.addPerson()" method="post">
-            <input type = "text" name="name"/>
-            <button>add Person</button>
-        </form>
-
-        <form actionName="@routes.HomeController.downloadCsv()" method="post" enctype="multipart/form-data">
-            <input type="file" name="csv">
-            <p>
-                <input type="submit">
-            </p>
-        </form>
-
-    }
+}

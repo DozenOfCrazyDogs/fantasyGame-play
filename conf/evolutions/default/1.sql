@@ -3,15 +3,17 @@
 
 # --- !Ups
 
-create table column_name (
-  id                        bigserial not null,
-  name                      varchar(255),
-  constraint pk_column_name primary key (id))
-;
-
 create table person (
   id                        serial not null,
   name                      varchar(255),
+  max_health                integer,
+  current_health            integer,
+  max_mana                  integer,
+  current_mana              integer,
+  physical_attack           integer,
+  physical_defence          integer,
+  magical_attack            integer,
+  magical_defence           integer,
   constraint pk_person primary key (id))
 ;
 
@@ -19,8 +21,6 @@ create table person (
 
 
 # --- !Downs
-
-drop table if exists column_name cascade;
 
 drop table if exists person cascade;
 
