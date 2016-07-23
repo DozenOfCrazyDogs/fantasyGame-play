@@ -20,7 +20,8 @@ import static play.libs.Json.toJson;
  * to the application's home page.
  */
 public class HomeController extends Controller {
-
+    @Inject
+    private CacheApi cacheApi;
     @Inject
     private FormFactory formFactory;
     @Inject
@@ -52,12 +53,15 @@ public class HomeController extends Controller {
         return ok(toJson(persons));
     }
 
-//    public Result heroTurn(){
-////        CacheApi cacheApi = Cache.
-////        Application
-////        Cache.get("state", FightState.class);
-//        InboundAction inboundAction = formFactory.form(InboundAction.class).bindFromRequest().get();
-//    }
+    public Result heroTurn() {
+        InboundAction inboundAction = formFactory.form(InboundAction.class).bindFromRequest().get();
+
+        FightState fightState = cacheApi.get("fightState");
+        FightProcessor fightProcessor = new FightProcessor(fightState);
+        fightProcessor.doAction(inboundAction);
+//        Cache.get("state", FightState.class);
+        return ok();
+    }
 
 
 }

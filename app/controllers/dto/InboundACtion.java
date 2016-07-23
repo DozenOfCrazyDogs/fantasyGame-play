@@ -4,14 +4,14 @@ package controllers.dto;
  * Created by Igor_Kravchenko on 4/18/16.
  */
 public class InboundAction {
-    private String action;
+    private String actionName;
 
-    public String getAction() {
-        return action;
+    public String getActionName() {
+        return actionName;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
     }
 
 

@@ -11,12 +11,12 @@
     @main("Welcome to Play") {
 
 
-        <form action="@routes.HomeController.addPerson()" method="post">
+        <form actionName="@routes.HomeController.addPerson()" method="post">
             <input type = "text" name="name"/>
             <button>add Person</button>
         </form>
 
-        <form action="@routes.HomeController.downloadCsv()" method="post" enctype="multipart/form-data">
+        <form actionName="@routes.HomeController.downloadCsv()" method="post" enctype="multipart/form-data">
             <input type="file" name="csv">
             <p>
                 <input type="submit">

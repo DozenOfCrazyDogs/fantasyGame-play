@@ -1,5 +1,6 @@
 package services;
 
+import controllers.dto.InboundAction;
 import models.FightState;
 
 /**
@@ -14,4 +15,17 @@ public class FightProcessor {
     }
 
 
+    public void doAction(InboundAction inboundAction) {
+        String actionName = inboundAction.getActionName();
+        Action action = fightState.hero.actions.get(actionName);
+        action.cast(fightState);
+    }
+
+    public void onHeroAction() {
+
+    }
+
+    public void onBossAction() {
+
+    }
 }
