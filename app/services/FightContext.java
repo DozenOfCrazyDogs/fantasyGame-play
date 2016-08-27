@@ -1,13 +1,16 @@
 package services;
 
 import controllers.dto.InboundAction;
-import models.actions.Action;
-import models.buffs.Buff;
+import models.personages.Person;
 import models.personages.enemies.Enemy;
 import models.personages.heroes.Hero;
+import services.microcommand.MicroCommand;
+import services.visitorThoughts.spells.Spell;
+import services.visitorThoughts.spells.impl.FireballSpell;
+import services.visitorThoughts.visitor.CasterBuffProcessor;
+import services.visitorThoughts.visitor.FinishSpellVisitor;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Igor on 23.07.2016.
@@ -16,44 +19,53 @@ public class FightContext {
 
     private Enemy enemy;
     private Hero hero;
-    private LinkedList<List<Buff>> buffsSchedule = new LinkedList<>();
+
+    private LinkedList<MicroCommand> actionStackForThisTurn = new LinkedList<>();
+    private LinkedList<LinkedList<MicroCommand>> actionStackForBattle = new LinkedList<>();
+    private CasterBuffProcessor casterBuffProcessor = new CasterBuffProcessor(this);
+    private FinishSpellVisitor finishSpellProcessor = new FinishSpellVisitor(this);
 
 
     public FightContext() {
     }
 
     public void setupPersonages(Hero hero, Enemy enemy) {
-        //todo to remove doubling of current and max parameters use new WrappedPerson with composition and current states of same properties
         this.hero = hero;
         this.enemy = enemy;
     }
 
     public void setupFullHealthMana() {
-        hero.currentHealth = hero.maxHealth;
-        hero.currentMana = hero.maxMana;
-        enemy.currentHealth = enemy.maxHealth;
-        enemy.currentMana = enemy.maxMana;
+        hero.health = 100;
+        hero.mana = 100;
     }
 
     public void doTurn(InboundAction inboundAction) {
-        buffProcessingBeforeTurn();
+//        buffProcessingBeforeTurn();
         String actionName = inboundAction.getActionName();
-        Action action = hero.getActions().get(actionName);
-        action.cast(hero, enemy, this);
-        enemy.doAITurn(this);
+        Spell spell = hero.spells.get(actionName);
+        //todo somehow handle target
+        Person target = ejectTarget(inboundAction);
+        processSpell(spell);
+//        action.cast(hero, enemy, this);
+//        enemy.doAITurn(this);
+//
+//        buffProcessingAfterTurnDone();
+    }
 
-        buffProcessingAfterTurnDone();
+    private void processSpell(Spell spell) {
+        spell.accept(casterBuffProcessor);
+        spell.accept(finishSpellProcessor);
+    }
+
+    private Person ejectTarget(InboundAction inboundAction) {
+        String targetName = inboundAction.getTarget();
+        return hero.name.equals(targetName) ? hero : enemy;
     }
 
     private void buffProcessingBeforeTurn() {
         //todo execute buffs
     }
 
-    private void buffProcessingAfterTurnDone() {
-        resetStatsToDefault();
-        if (!buffsSchedule.isEmpty())
-            buffsSchedule.removeFirst();
-    }
 
     private void resetStatsToDefault() {
         //todo reset stats to default should be called on wrapped object
@@ -83,12 +95,20 @@ public class FightContext {
     public void setHero(Hero hero) {
         this.hero = hero;
     }
-    public LinkedList<List<Buff>> getBuffsSchedule() {
-        return buffsSchedule;
+
+    public LinkedList<MicroCommand> getActionStackForThisTurn() {
+        return actionStackForThisTurn;
     }
 
-    public void setBuffsSchedule(LinkedList<List<Buff>> buffsSchedule) {
-        this.buffsSchedule = buffsSchedule;
+    public void setActionStackForThisTurn(LinkedList<MicroCommand> actionStackForThisTurn) {
+        this.actionStackForThisTurn = actionStackForThisTurn;
     }
 
+    public LinkedList<LinkedList<MicroCommand>> getActionStackForBattle() {
+        return actionStackForBattle;
+    }
+
+    public void setActionStackForBattle(LinkedList<LinkedList<MicroCommand>> actionStackForBattle) {
+        this.actionStackForBattle = actionStackForBattle;
+    }
 }

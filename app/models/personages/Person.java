@@ -5,8 +5,7 @@ package models.personages;
  */
 
 import com.avaje.ebean.Model;
-import models.buffs.Buff;
-import models.actions.Action;
+import services.visitorThoughts.spells.Spell;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,31 +19,16 @@ public abstract class Person extends Model {
     @Id
     public Integer id;
     public String name;
-    public int maxHealth;
-    public int currentHealth;
-    public int maxMana;
-    public int currentMana;
+    public int health;
+    public int mana;
     public int physicalAttack;
     public int physicalDefence;
     public int magicalAttack;
     public int magicalDefence;
 
-    protected HashMap<String, Action> actions;
-    protected HashMap<String, Buff> buffs;
+    public HashMap<String, Spell> spells;
 
-    public HashMap<String, Action> getActions() {
-        return actions;
-    }
+    public abstract Person getProfile();
 
-    public void setActions(HashMap<String, Action> actions) {
-        this.actions = actions;
-    }
 
-    public HashMap<String, Buff> getBuffs() {
-        return buffs;
-    }
-
-    public void setBuffs(HashMap<String, Buff> buffs) {
-        this.buffs = buffs;
-    }
 }

@@ -2,6 +2,8 @@ package models.personages.heroes;
 
 import models.actions.Action;
 import models.actions.AttackAction;
+import services.visitorThoughts.spells.Spell;
+import services.visitorThoughts.spells.elementary.AttackSpell;
 
 import java.util.HashMap;
 
@@ -13,18 +15,24 @@ public class Warrior extends Hero {
 
     }
 
-    public static Warrior createWarrior(String name) {
+    @Override
+    public Warrior getProfile() {
         Warrior warrior = new Warrior();
-        warrior.name = name;
-        warrior.maxHealth = 200;
-        warrior.maxMana = 0;
+        warrior.health = 200;
+        warrior.mana = 0;
         warrior.physicalAttack = 10;
         warrior.physicalDefence = 6;
-        HashMap<String, Action> actions = new HashMap<String, Action>() {{
-            put("attack", new AttackAction());
+        HashMap<String, Spell> actions = new HashMap<String, Spell>() {{
+            put("attack", new AttackSpell(10));
         }};
         warrior.setActions(actions);
         return warrior;
     }
 
+    public static Warrior createWarrior(String name) {
+        Warrior warrior = new Warrior();
+        warrior = warrior.getProfile();
+        warrior.name = name;
+        return warrior;
+    }
 }

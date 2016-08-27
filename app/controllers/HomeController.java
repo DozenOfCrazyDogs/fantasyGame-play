@@ -21,6 +21,8 @@ import static play.libs.Json.toJson;
  * to the application's home page.
  */
 public class HomeController extends Controller {
+
+    //todo covert to session cache
     @Inject
     private CacheApi cacheApi;
     @Inject
