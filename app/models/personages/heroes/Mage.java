@@ -1,17 +1,18 @@
 package models.personages.heroes;
 
-import models.actions.Action;
-import models.actions.FireballAction;
+import services.visitorThoughts.spells.Spell;
+import services.visitorThoughts.spells.impl.FireballSpell;
 
 import java.util.HashMap;
 
 /**
  * Created by Igor on 19.08.2016.
  */
-public class Mage extends Hero{
+public class Mage extends Hero {
     private Mage() {
 
     }
+
     @Override
     public Mage getProfile() {
         Mage mage = new Mage();
@@ -19,8 +20,8 @@ public class Mage extends Hero{
         mage.mana = 0;
         mage.physicalAttack = 10;
         mage.physicalDefence = 6;
-        mage.actions = new HashMap<String, Action>() {{
-            put("fireball", new FireballAction());
+        mage.spells = new HashMap<String, Spell>() {{
+            put("fireball", new FireballSpell());
         }};
         return mage;
     }

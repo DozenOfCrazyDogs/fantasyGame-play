@@ -1,7 +1,5 @@
 package models.personages.heroes;
 
-import models.actions.Action;
-import models.actions.AttackAction;
 import services.visitorThoughts.spells.Spell;
 import services.visitorThoughts.spells.elementary.AttackSpell;
 
@@ -22,10 +20,9 @@ public class Warrior extends Hero {
         warrior.mana = 0;
         warrior.physicalAttack = 10;
         warrior.physicalDefence = 6;
-        HashMap<String, Spell> actions = new HashMap<String, Spell>() {{
+        warrior.spells = new HashMap<String, Spell>() {{
             put("attack", new AttackSpell(10));
         }};
-        warrior.setActions(actions);
         return warrior;
     }
 

@@ -50,7 +50,7 @@ public class FireElemental extends Enemy {
         else
             spell = spells.get("fireball");
 
-        fightContext.doTurn(spell);
+        fightContext.processSpell(spell);
 
     }
 }

@@ -52,7 +52,7 @@ public class FightContext {
 //        buffProcessingAfterTurnDone();
     }
 
-    private void processSpell(Spell spell) {
+    public void processSpell(Spell spell) {
         spell.accept(casterBuffProcessor);
         spell.accept(finishSpellProcessor);
     }
