@@ -1,30 +1,15 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import org.junit.*;
-
-import play.mvc.*;
-import play.test.*;
-import play.data.DynamicForm;
-import play.data.validation.ValidationError;
-import play.data.validation.Constraints.RequiredValidator;
-import play.i18n.Lang;
-import play.libs.F;
-import play.libs.F.*;
+import org.junit.Test;
 import play.twirl.api.Content;
 
-import static play.test.Helpers.*;
-import static org.junit.Assert.*;
+import java.util.LinkedList;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 /**
- *
  * Simple (JUnit) tests that can call all parts of a play app.
  * If you are interested in mocking a whole application, see the wiki for more details.
- *
  */
 public class ApplicationTest {
 
@@ -32,6 +17,10 @@ public class ApplicationTest {
     public void simpleCheck() {
         int a = 1 + 1;
         assertEquals(2, a);
+        LinkedList<Integer> list = new LinkedList<Integer>() {{
+            add(10);
+            add(12);
+        }};
     }
 
     @Test

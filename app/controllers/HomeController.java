@@ -2,13 +2,16 @@ package controllers;
 
 import controllers.dto.InboundAction;
 import models.personages.Person;
+import models.personages.enemies.EnemyFactory;
 import models.personages.enemies.FireElemental;
-import models.personages.heroes.Warrior;
+import models.personages.heroes.Hero;
+import models.personages.heroes.HeroFactory;
 import play.cache.CacheApi;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.FightContext;
+import services.TurnService;
 import views.html.index;
 
 import javax.inject.Inject;
@@ -28,8 +31,14 @@ public class HomeController extends Controller {
     @Inject
     private FormFactory formFactory;
 
+    private TurnService turnService;
+
     public static final String fightStateKey = "fightState";
 
+    @Inject
+    public HomeController(TurnService turnService) {
+        this.turnService = turnService;
+    }
 
     public Result index() {
         return ok(index.render("Hello igor"));
@@ -42,11 +51,11 @@ public class HomeController extends Controller {
     }
 
     public Result initGame() {
-        Warrior warrior = Warrior.createWarrior("Igor");
-        FireElemental fireElemental = FireElemental.createFireElemental();
+        Hero hero = HeroFactory.createGod("Igor");
+        FireElemental fireElemental = EnemyFactory.createFireElemental();
 
         FightContext fightContext = new FightContext();
-        fightContext.setupPersonages(warrior,fireElemental);
+        fightContext.setupPersonages(hero, fireElemental);
         fightContext.setupFullHealthMana();
         cacheApi.set(fightStateKey, fightContext);
         return getCurrentState();
@@ -59,7 +68,7 @@ public class HomeController extends Controller {
     public Result heroTurn() {
         InboundAction inboundAction = formFactory.form(InboundAction.class).bindFromRequest().get();
         FightContext fightContext = cacheApi.get(fightStateKey);
-        fightContext.doTurn(inboundAction);
+        turnService.doTurn(fightContext, inboundAction);
         cacheApi.set(fightStateKey, fightContext);
         return getCurrentState();
     }

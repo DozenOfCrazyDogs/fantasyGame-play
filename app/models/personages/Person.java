@@ -5,7 +5,7 @@ package models.personages;
  */
 
 import com.avaje.ebean.Model;
-import services.visitorThoughts.spells.Spell;
+import services.spellprocessing.spells.Spell;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,7 +28,6 @@ public abstract class Person extends Model {
 
     public HashMap<String, Spell> spells;
 
-    public abstract Person getProfile();
-
+    public abstract void setupDefaultParameters();
 
 }

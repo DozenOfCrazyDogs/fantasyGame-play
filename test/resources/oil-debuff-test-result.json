@@ -1,0 +1,71 @@
+{
+  "enemy": {
+    "id": null,
+    "name": "FireElemental",
+    "health": 400,
+    "mana": 100,
+    "physicalAttack": 0,
+    "physicalDefence": 0,
+    "magicalAttack": 0,
+    "magicalDefence": 0,
+    "spells": {
+      "attack": {
+        "damage": 10
+      },
+      "fireball": {
+        "spells": [
+          {
+            "damage": 100
+          },
+          {
+            "turns": 3,
+            "damageEveryTurn": 2
+          }
+        ]
+      }
+    }
+  },
+  "hero": {
+    "id": null,
+    "name": "Igor",
+    "health": 100,
+    "mana": 100,
+    "physicalAttack": 100,
+    "physicalDefence": 60,
+    "magicalAttack": 0,
+    "magicalDefence": 0,
+    "spells": {
+      "oil": {
+        "turns": 2,
+        "damageEveryTurn": 0
+      },
+      "attack": {
+        "damage": 20
+      },
+      "fireball": {
+        "spells": [
+          {
+            "damage": 100
+          },
+          {
+            "turns": 3,
+            "damageEveryTurn": 2
+          }
+        ]
+      }
+    }
+  },
+  "actionStackForThisTurn": [],
+  "actionStackForBattle": [
+    [
+      {
+        "damage": 0
+      }
+    ],
+    [
+      {
+        "damage": 0
+      }
+    ]
+  ]
+}

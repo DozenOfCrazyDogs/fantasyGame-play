@@ -1,7 +1,8 @@
-package services.visitorThoughts.spells.elementary;
+package services.spellprocessing.spells.elementary;
 
-import services.visitorThoughts.spells.Spell;
-import services.visitorThoughts.visitor.SpellVisitor;
+import services.FightContext;
+import services.spellprocessing.spells.Spell;
+import services.spellprocessing.visitor.SpellVisitor;
 
 /**
  * Created by Igor on 21.08.2016.
@@ -14,8 +15,8 @@ public class AttackSpell implements Spell {
     }
 
     @Override
-    public void accept(SpellVisitor visitor) {
-        visitor.visit(this);
+    public void accept(SpellVisitor visitor, FightContext fightContext) {
+        visitor.visit(this, fightContext);
     }
 
     public int getDamage() {

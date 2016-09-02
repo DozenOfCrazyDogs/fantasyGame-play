@@ -9,6 +9,8 @@ scalaVersion := "2.11.7"
 libraryDependencies ++= Seq(
   "org.postgresql" % "postgresql" % "9.4.1208.jre7",
   "commons-io" % "commons-io" % "2.4",
+  "org.skyscreamer" % "jsonassert" % "1.3.0",
+  "com.google.guava" % "guava" % "12.0",
   javaJpa,
   cache,
   javaWs
