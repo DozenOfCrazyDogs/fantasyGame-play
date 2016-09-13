@@ -2,7 +2,7 @@
   "enemy": {
     "id": null,
     "name": "FireElemental",
-    "health": 298,
+    "health": 100,
     "mana": 100,
     "physicalAttack": 0,
     "physicalDefence": 0,
@@ -10,20 +10,24 @@
     "magicalDefence": 0,
     "spells": {
       "attack": {
-        "damage": 10
+        "damageType": "PHYSIC"
       },
       "fireball": {
         "spells": [
           {
-            "damage": 100
+            "damageType": "FIRE"
           },
           {
+            "name": "burning",
             "turns": 3,
-            "damageEveryTurn": 2
+            "damageEveryTurn": 2,
+            "createWeakness": null,
+            "weaknessValue": 0.0
           }
         ]
       }
-    }
+    },
+    "statusEffects": null
   },
   "hero": {
     "id": null,
@@ -36,43 +40,59 @@
     "magicalDefence": 0,
     "spells": {
       "oil": {
+        "name": "oil",
         "turns": 2,
-        "damageEveryTurn": 0
+        "damageEveryTurn": 0,
+        "createWeakness": "FIRE",
+        "weaknessValue": 0.5
       },
       "attack": {
-        "damage": 20
+        "damageType": "PHYSIC"
       },
       "fireball": {
         "spells": [
           {
-            "damage": 100
+            "damageType": "FIRE"
           },
           {
+            "name": "burning",
             "turns": 3,
-            "damageEveryTurn": 2
+            "damageEveryTurn": 2,
+            "createWeakness": null,
+            "weaknessValue": 0.0
           }
         ]
       }
-    }
+    },
+    "statusEffects": null
   },
   "actionStackForThisTurn": [
     {
-      "damage": 2
+      "damage": 100
     },
     {
       "damage": 100
     }
   ],
   "actionStackForBattle": [
-    [
-      {
-        "damage": 2
-      }
-    ],
-    [
-      {
-        "damage": 2
-      }
-    ]
-  ]
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "doneActionsForBattle": null
 }
