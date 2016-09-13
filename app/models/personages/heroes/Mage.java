@@ -1,8 +1,10 @@
 package models.personages.heroes;
 
+import services.spellprocessing.spells.DamageType;
 import services.spellprocessing.spells.Spell;
 import services.spellprocessing.spells.elementary.AttackSpell;
 import services.spellprocessing.spells.impl.FireballSpell;
+import services.spellprocessing.spells.impl.PhysicAttackSpell;
 
 import java.util.HashMap;
 
@@ -15,10 +17,10 @@ public class Mage extends Hero {
     public void setupDefaultParameters() {
         this.health = 200;
         this.mana = 0;
-        this.physicalAttack = 10;
+        this.physicalAttack = 1;
         this.physicalDefence = 6;
         this.spells = new HashMap<String, Spell>() {{
-            put("attack", new AttackSpell(2));
+            put("attack", new PhysicAttackSpell());
             put("fireball", new FireballSpell());
         }};
     }

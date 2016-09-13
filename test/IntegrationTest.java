@@ -37,6 +37,7 @@ public class IntegrationTest {
                 .uri("/heroTurn");
 
         Result result = route(request);
+         result = route(request);
         String resultJson = extractJsonResponseFromResult(result);
         System.out.println(resultJson);
         assertJsonEquals("simple-attack-result.json", resultJson);

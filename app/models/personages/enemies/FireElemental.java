@@ -4,6 +4,7 @@ import services.FightContext;
 import services.spellprocessing.spells.Spell;
 import services.spellprocessing.spells.elementary.AttackSpell;
 import services.spellprocessing.spells.impl.FireballSpell;
+import services.spellprocessing.spells.impl.PhysicAttackSpell;
 
 import java.util.HashMap;
 
@@ -21,7 +22,7 @@ public class FireElemental extends Enemy {
         this.physicalAttack = 0;
         this.physicalDefence = 0;
         HashMap<String, Spell> spells = new HashMap<>();
-        spells.put("attack", new AttackSpell(10));
+        spells.put("attack", new PhysicAttackSpell());
         spells.put("fireball", new FireballSpell());
         this.spells = spells;
     }

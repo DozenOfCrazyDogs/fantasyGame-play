@@ -1,7 +1,9 @@
 package models.personages.heroes;
 
+import services.spellprocessing.spells.DamageType;
 import services.spellprocessing.spells.Spell;
 import services.spellprocessing.spells.elementary.AttackSpell;
+import services.spellprocessing.spells.impl.PhysicAttackSpell;
 
 import java.util.HashMap;
 
@@ -16,7 +18,7 @@ public class Warrior extends Hero {
         this.physicalAttack = 10;
         this.physicalDefence = 6;
         this.spells = new HashMap<String, Spell>() {{
-            put("attack", new AttackSpell(10));
+            put("attack", new PhysicAttackSpell());
         }};
     }
 }

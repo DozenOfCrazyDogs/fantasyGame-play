@@ -4,13 +4,17 @@ import services.FightContext;
 
 /**
  * Created by Igor on 19.08.2016.
+ * Use {@link MicroCommandFactory} for creation
  */
-public class ReduceHpCommand implements MicroCommand {
+class ReduceHpCommand implements MicroCommand {
     private int damage;
+
+    ReduceHpCommand(int damage) {
+        this.damage = damage;
+    }
 
     @Override
     public void execute(FightContext fightContext) {
-        //todo need target here
         fightContext.getEnemy().health -= damage;
     }
 

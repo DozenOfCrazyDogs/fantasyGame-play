@@ -6,10 +6,12 @@ package models.personages;
 
 import com.avaje.ebean.Model;
 import services.spellprocessing.spells.Spell;
+import services.spellprocessing.statuseffects.StatusEffect;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.HashMap;
+import java.util.List;
 
 @Entity
 public abstract class Person extends Model {
@@ -27,6 +29,7 @@ public abstract class Person extends Model {
     public int magicalDefence;
 
     public HashMap<String, Spell> spells;
+    public List<StatusEffect> statusEffects;
 
     public abstract void setupDefaultParameters();
 

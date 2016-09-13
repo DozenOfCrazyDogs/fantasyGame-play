@@ -35,20 +35,12 @@ public class TurnServiceImpl implements TurnService {
     @Override
     public void doTurn(FightContext fightContext, InboundAction inboundAction) {
         this.fightContext = fightContext;
-        prepareActionLists();
         prepareHeroTurn(inboundAction);
 //        prepareEnemyTurn(inboundAction);
         executeMicroCommandsForThisTurn();
-        fightContext.getActionStackForBattle().removeFirst();
+        fightContext.getActionsList().nextTurn();
     }
 
-    private void prepareActionLists() {
-        LinkedList<LinkedList<MicroCommand>> actionStackForBattle = fightContext.getActionStackForBattle();
-        if (actionStackForBattle.isEmpty()) {
-            actionStackForBattle.addFirst(new LinkedList<>());
-        }
-        fightContext.setActionStackForThisTurn(actionStackForBattle.getFirst());
-    }
 
     private void prepareHeroTurn(InboundAction inboundAction) {
         String actionName = inboundAction.getActionName();
@@ -76,7 +68,7 @@ public class TurnServiceImpl implements TurnService {
     }
 
     private void executeMicroCommandsForThisTurn() {
-        LinkedList<MicroCommand> actionStackForThisTurn = fightContext.getActionStackForThisTurn();
+        LinkedList<MicroCommand> actionStackForThisTurn = fightContext.getActionsList().getCurrentTurn();
         for (MicroCommand microCommand : actionStackForThisTurn) {
             microCommand.execute(fightContext);
         }

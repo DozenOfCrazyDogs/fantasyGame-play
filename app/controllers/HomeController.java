@@ -55,7 +55,7 @@ public class HomeController extends Controller {
         FireElemental fireElemental = EnemyFactory.createFireElemental();
 
         FightContext fightContext = new FightContext();
-        fightContext.setupPersonages(hero, fireElemental);
+        fightContext.startFight(hero, fireElemental);
         fightContext.setupFullHealthMana();
         cacheApi.set(fightStateKey, fightContext);
         return getCurrentState();
